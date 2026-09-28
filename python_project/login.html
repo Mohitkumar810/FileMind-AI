@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>FileMind AI - Login</title>
+
+    <link
+        rel="stylesheet"
+        href="login.css">
+
+</head>
+
+<body>
+
+    <!-- BACKGROUND -->
+
+    <div class="background">
+
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+
+    </div>
+
+
+    <!-- LOGIN CARD -->
+
+    <div class="login-card">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                ✦
+            </div>
+
+            <span>
+                FileMind <b>AI</b>
+            </span>
+
+        </div>
+
+
+        <!-- HEADING -->
+
+        <div class="heading">
+
+            <h1 id="title">
+                Welcome back
+            </h1>
+
+            <p id="subtitle">
+                Login to continue to your workspace
+            </p>
+
+        </div>
+
+
+        <!-- LOGIN / SIGN UP -->
+
+        <div class="auth-tabs">
+
+            <button
+                type="button"
+                id="loginTab"
+                class="tab active"
+                onclick="showLogin()">
+
+                Login
+
+            </button>
+
+            <button
+                type="button"
+                id="signupTab"
+                class="tab"
+                onclick="showSignup()">
+
+                Sign Up
+
+            </button>
+
+        </div>
+
+
+        <!-- EMAIL / PHONE -->
+
+        <div class="method-tabs">
+
+            <button
+                type="button"
+                id="emailTab"
+                class="method active"
+                onclick="selectMethod('email')">
+
+                <span>📧</span>
+                Email
+
+            </button>
+
+            <button
+                type="button"
+                id="phoneTab"
+                class="method"
+                onclick="selectMethod('phone')">
+
+                <span>📱</span>
+                Phone
+
+            </button>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form
+            id="authForm"
+            onsubmit="handleSubmit(event)">
+
+
+            <!-- NAME -->
+
+            <div
+                id="nameBox"
+                class="input-group hidden">
+
+                <label>
+                    Full Name
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        👤
+                    </span>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name">
+
+                </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div
+                id="emailBox"
+                class="input-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        ✉
+                    </span>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="you@example.com">
+
+                </div>
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div
+                id="phoneBox"
+                class="input-group hidden">
+
+                <label>
+                    Phone Number
+                </label>
+
+                <div class="phone-wrapper">
+
+                    <select id="countryCode">
+
+                        <option value="+91">
+                            🇮🇳 +91
+                        </option>
+
+                        <option value="+1">
+                            🇺🇸 +1
+                        </option>
+
+                        <option value="+44">
+                            🇬🇧 +44
+                        </option>
+
+                        <option value="+61">
+                            🇦🇺 +61
+                        </option>
+
+                    </select>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter phone number">
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="input-group">
+
+                <div class="password-label">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <button
+                        type="button"
+                        onclick="forgotPassword()">
+
+                        Forgot password?
+
+                    </button>
+
+                </div>
+
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password">
+
+                    <button
+                        type="button"
+                        class="eye"
+                        onclick="togglePassword()"
+                        id="eyeButton">
+
+                        👁
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div
+                id="confirmBox"
+                class="input-group hidden">
+
+                <label>
+                    Confirm Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password">
+
+                </div>
+
+            </div>
+
+
+            <!-- REMEMBER -->
+
+            <div class="remember">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="rememberMe">
+
+                    <span>
+                        Remember me
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="login-button"
+                id="submitButton">
+
+                Login
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+        </form>
+
+
+        <!-- DIVIDER -->
+
+        <div class="divider">
+
+            <span>
+                OR
+            </span>
+
+        </div>
+
+
+        <!-- GUEST -->
+
+        <button
+            type="button"
+            class="guest-button"
+            onclick="continueAsGuest()">
+
+            <span>
+                👤
+            </span>
+
+            Continue as Guest
+
+        </button>
+
+
+        <!-- TERMS -->
+
+        <p class="terms">
+
+            By continuing, you agree to our
+
+            <a href="#">
+                Terms
+            </a>
+
+            and
+
+            <a href="#">
+                Privacy Policy
+            </a>.
+
+        </p>
+
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="login.js"></script>
+
+</body>
+
+</html>

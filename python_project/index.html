@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FileMind AI</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="logo">
+                <span class="logo-icon">✦</span>
+                <span>FileMind</span>
+                <small>AI</small>
+            </div>
+
+            <button
+                class="close-btn"
+                onclick="toggleSidebar()"
+                aria-label="Close sidebar">
+                ☰
+            </button>
+
+        </div>
+
+
+        <!-- NEW CHAT -->
+
+        <button class="new-chat" onclick="newChat()">
+            <span>＋</span>
+            New Chat
+        </button>
+
+
+        <!-- WORKSPACE -->
+
+        <div class="sidebar-section">
+
+            <p class="section-title">
+                WORKSPACE
+            </p>
+
+            <button class="side-item" onclick="focusSearch()">
+                <span>⌕</span>
+                Search
+            </button>
+
+            <button class="side-item" onclick="showFiles()">
+                <span>▣</span>
+                My Files
+            </button>
+
+            <button class="side-item" onclick="showHistory()">
+                <span>◷</span>
+                Upload History
+            </button>
+
+        </div>
+
+
+        <!-- RECENT FILES -->
+
+        <div class="sidebar-section history">
+
+            <p class="section-title">
+                RECENT FILES
+            </p>
+
+            <div id="historyList">
+
+                <div class="history-item">
+                    <span>📄</span>
+                    <span>No files yet</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SIDEBAR BOTTOM -->
+
+        <div class="sidebar-bottom">
+
+            <button class="side-item" onclick="openSettings()">
+                <span>⚙</span>
+                Settings
+            </button>
+
+            <button class="side-item" onclick="toggleAppearance()">
+                <span>◐</span>
+                Appearance
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <button
+                class="menu-btn"
+                onclick="toggleSidebar()"
+                aria-label="Open sidebar">
+                ☰
+            </button>
+
+
+            <div class="header-title">
+
+                <span class="mobile-logo">✦</span>
+
+                <span>
+                    AI File Assistant
+                </span>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="header-btn"
+                    onclick="focusSearch()"
+                    aria-label="Search">
+                    ⌕
+                </button>
+
+                <button
+                    class="profile"
+                    onclick="openProfile()"
+                    aria-label="Profile">
+                    K
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <section class="content">
+
+
+            <!-- WELCOME -->
+
+            <div class="welcome">
+
+                <div class="welcome-badge">
+                    ✦ AI-Powered File Assistant
+                </div>
+
+                <h1>
+                    What can I help you
+                    <span>understand?</span>
+                </h1>
+
+                <p>
+                    Upload your files and let FileMind AI
+                    summarize, analyze, and answer questions
+                    about your content.
+                </p>
+
+            </div>
+
+
+            <!-- ================= UPLOAD ================= -->
+
+            <div
+                class="upload-container"
+                id="uploadContainer"
+                ondragover="handleDragOver(event)"
+                ondragleave="handleDragLeave(event)"
+                ondrop="handleDrop(event)">
+
+                <div class="upload-icon">
+                    ↑
+                </div>
+
+                <h2>
+                    Upload your files
+                </h2>
+
+                <p>
+                    Drag & drop your files here or choose
+                    them from your device
+                </p>
+
+
+                <!-- FILE TYPES -->
+
+                <div class="file-types">
+
+                    <span>PDF</span>
+                    <span>TXT</span>
+                    <span>CSV</span>
+                    <span>PNG</span>
+                    <span>JPG</span>
+
+                </div>
+
+
+                <label
+                    for="fileInput"
+                    class="upload-btn">
+
+                    <span>＋</span>
+                    Choose Files
+
+                </label>
+
+
+                <input
+                    type="file"
+                    id="fileInput"
+                    hidden
+                    multiple
+                    accept=".pdf,.txt,.csv,.png,.jpg,.jpeg">
+
+
+                <p class="drop-text">
+                    Maximum file size depends on your configuration
+                </p>
+
+            </div>
+
+
+            <!-- ================= UPLOADED FILES ================= -->
+
+            <div
+                class="file-area"
+                id="fileArea">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>Uploaded Files</h2>
+
+                        <p>
+                            Files available for analysis
+                        </p>
+                    </div>
+
+                    <span
+                        class="file-count"
+                        id="fileCount">
+                        0 files
+                    </span>
+
+                </div>
+
+
+                <div id="fileList">
+
+                    <!-- Files will be added using JavaScript -->
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= AI SUMMARY ================= -->
+
+            <div
+                class="summary-card"
+                id="summaryCard">
+
+                <div class="summary-header">
+
+                    <div class="summary-title">
+
+                        <span class="ai-icon">
+                            ✦
+                        </span>
+
+                        <div>
+                            <strong>AI Summary</strong>
+
+                            <small>
+                                Generated from your file
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <span
+                        class="status"
+                        id="summaryStatus">
+
+                        Ready
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="summary-content"
+                    id="summary">
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+                            ✦
+                        </div>
+
+                        <h3>
+                            Your summary will appear here
+                        </h3>
+
+                        <p>
+                            Upload a document to let FileMind
+                            AI generate a concise summary.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= CHAT ================= -->
+
+            <div class="chat-card">
+
+                <div class="chat-header">
+
+                    <div>
+
+                        <span class="chat-ai-icon">
+                            ✦
+                        </span>
+
+                        <div>
+                            <strong>
+                                Ask about your file
+                            </strong>
+
+                            <small>
+                                FileMind AI Assistant
+                            </small>
+                        </div>
+
+                    </div>
+
+                    <span class="online-status">
+                        ● Ready
+                    </span>
+
+                </div>
+
+
+                <!-- CHAT MESSAGE -->
+
+                <div
+                    class="chat-message"
+                    id="chatMessage">
+
+                    <div class="assistant-avatar">
+                        ✦
+                    </div>
+
+                    <div class="message-content">
+
+                        <p>
+                            Upload a document and ask me
+                            anything about its content.
+                        </p>
+
+                        <div class="suggested-questions">
+
+                            <button onclick="setQuestion('Summarize this file')">
+                                Summarize this file
+                            </button>
+
+                            <button onclick="setQuestion('What are the main points?')">
+                                Main points
+                            </button>
+
+                            <button onclick="setQuestion('Explain this file')">
+                                Explain this file
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CHAT INPUT -->
+
+                <div class="chat-input">
+
+                    <input
+                        type="text"
+                        id="questionInput"
+                        placeholder="Ask something about your file..."
+                        autocomplete="off"
+                        onkeydown="handleQuestionKey(event)">
+
+
+                    <button
+                        onclick="askQuestion()"
+                        aria-label="Send question">
+
+                        ➤
+
+                    </button>
+
+                </div>
+
+
+                <div class="chat-footer">
+
+                    <span>
+                        ✦ AI responses may need verification
+                    </span>
+
+                    <span>
+                        Enter to send
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= FEATURES ================= -->
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📄
+                    </div>
+
+                    <h3>
+                        Smart Summaries
+                    </h3>
+
+                    <p>
+                        Get concise summaries of long
+                        documents in seconds.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        💬
+                    </div>
+
+                    <h3>
+                        Ask Questions
+                    </h3>
+
+                    <p>
+                        Ask questions and understand your
+                        documents more easily.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🔎
+                    </div>
+
+                    <h3>
+                        Find Information
+                    </h3>
+
+                    <p>
+                        Quickly locate important information
+                        inside your uploaded files.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= SCRIPT ================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
